@@ -52,8 +52,8 @@ def findForNthDay(n):
 
 
 # Creating a pickle file for the classifier
-filename = 'covid-predict-ml\polynomial_features.pkl'
-filename_model = 'covid-predict-ml\ploynomail-model.pkl'
+filename = 'polynomial_features.pkl'
+filename_model = 'ploynomail-model.pkl'
 print(pickle)
 pickle.dump(polynomial_features, open(filename, 'wb')) 
 pickle.dump(poly, open(filename_model, 'wb')) 
@@ -75,7 +75,9 @@ def linePlot():
     sns.lineplot(x="Date", y="Cases", data=dataframeFilter)
     bytes_image = io.BytesIO()
     plt.savefig(bytes_image, format='png')
-    my_path = "covid-predict-ml\static\images"
+    my_path = os.path.dirname(__file__)+"\static\images"
+    print(os.path.dirname(__file__))
+
     my_file = 'graph.png'
     plt.savefig(os.path.join(my_path, my_file))
     return "\static\images\graph.png"
