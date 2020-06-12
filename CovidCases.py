@@ -75,7 +75,7 @@ def linePlot():
     sns.lineplot(x="Date", y="Cases", data=dataframeFilter)
     bytes_image = io.BytesIO()
     plt.savefig(bytes_image, format='png')
-    my_path = os.path.dirname(__file__)+"\static\images"
+    my_path = os.path.dirname(__file__)+"/static/images"
     print(os.path.dirname(__file__))
 
     my_file = 'graph.png'
