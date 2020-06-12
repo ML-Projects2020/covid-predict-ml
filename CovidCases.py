@@ -11,7 +11,7 @@ from datetime import date
 import pickle
 import io
 import os
-cases = pd.read_csv('Ploynomial\Book.csv')
+cases = pd.read_csv('covid-predict-ml\Book.csv')
 
 cases = cases[cases['Cases'].notna()]
 
