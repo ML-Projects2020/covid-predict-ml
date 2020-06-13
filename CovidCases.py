@@ -11,8 +11,7 @@ from datetime import date
 import pickle
 import io
 import os
-cases = pd.read_csv('Book.csv')
-
+cases = pd.read_csv(os.path.dirname(__file__)+'/Book.csv')
 cases = cases[cases['Cases'].notna()]
 
 X = cases[['Day']]
@@ -74,6 +73,7 @@ def linePlot():
     plt.subplots(figsize=(11, 9))
     sns.lineplot(x="Date", y="Cases", data=dataframeFilter)
     bytes_image = io.BytesIO()
+    plt.title("Graph showing number of cases as per the training data")
     plt.savefig(bytes_image, format='png')
     my_path = os.path.dirname(__file__)+"/static/images"
     print(os.path.dirname(__file__))

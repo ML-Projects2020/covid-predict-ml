@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 from CovidCases import linePlot as linePlot
 from datetime import date
+
 # Load the Random Forest CLassifier model
 polynomial_features = pickle.load(open("polynomial_features.pkl", 'rb'))
 ploynomail_model = pickle.load(open("ploynomail-model.pkl", 'rb'))
@@ -29,14 +30,13 @@ def predict():
     if request.method == 'POST':
         date = str(request.form['date'])
         dates = date.split('-')
-        print("Dates", int(dates[0]))
         noOfdays = calculateDays(int(dates[0]),int(dates[1]), int(dates[2]))
         x_poly = polynomial_features.fit_transform(noOfdays.reshape(-1,1))
         my_prediction = ploynomail_model.predict(x_poly)
         predictNumber = int(my_prediction)
         print('myprediction', my_prediction)
-        fromNumber = predictNumber - 7500
-        toNumber = predictNumber + 7500
+        fromNumber = predictNumber - 1000
+        toNumber = predictNumber + 1000
         
         return render_template('result.html', fromNumber=fromNumber, toNumber=toNumber)
 

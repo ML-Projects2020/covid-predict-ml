@@ -126,3 +126,8 @@ body{
 .image {
 	width: 100%;
 }
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}

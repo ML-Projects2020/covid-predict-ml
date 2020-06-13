@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    
 </head>
 
 <body>
@@ -29,10 +29,10 @@
         <div class="row">
             <form class="form-horizontal col-md-4" action="{{ url_for('predict') }}" method="POST">
                 <div class="form-group">
-                    <label class="control-label" for="email">Enter Date:</label>
+                    <label class="control-label" for="email">Select the Date:</label>
                     <div >
-                        <input autocomplete="off" class="form-control" type="text" name="date"
-                            placeholder="Enter date in yyyy-mm-dd, ex: 2020-6-12"><br>
+                        <input autocomplete="off" min="2020-03-01" class="form-control" type="date" name="date"
+                            placeholder="Enter date in yyyy-mm-dd, ex: 2020-06-12"><br>
 
                     </div>
                 </div>
