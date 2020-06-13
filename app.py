@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 from CovidCases import linePlot as linePlot
 from datetime import date
+import locale
 
 # Load the Random Forest CLassifier model
 polynomial_features = pickle.load(open("polynomial_features.pkl", 'rb'))
@@ -38,6 +39,9 @@ def predict():
         fromNumber = predictNumber - 1000
         toNumber = predictNumber + 1000
         
+        locale.setlocale(locale.LC_ALL, 'en_IN')
+        fromNumber = locale.format('%d', fromNumber, grouping=True)
+        toNumber = locale.format('%d', toNumber, grouping=True)
         return render_template('result.html', fromNumber=fromNumber, toNumber=toNumber)
 
 if __name__ == '__main__':
