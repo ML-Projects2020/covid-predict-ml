@@ -26,29 +26,16 @@ y_pred = lm.predict(X_train)
 plt.plot(X_train,y_pred,color='g',label='Linear Regression')
 
 
-polynomial_features= PolynomialFeatures(degree=3)
+polynomial_features= PolynomialFeatures(degree=3) #To convert X (date) to degree
 x_poly = polynomial_features.fit_transform(X)
-poly = LinearRegression()
+poly = LinearRegression() #Object to fit / predict
 poly.fit(x_poly, y)
-y_poly_pred = poly.predict(x_poly)
-plt.scatter(X, y, color="b",s=15)
-plt.plot(X,y_poly_pred,color='r',label='Polynomial Regression')
 
-
-r2 = metrics.r2_score(y,y_poly_pred)
-print(r2)
-#Give input of date in year, month, day
-def calculateDays():
-    f_date = date(2020, 3, 1)
-    l_date = date(2020, 6, 11) #Selected date
-    delta = l_date - f_date
-    return delta.days+1
-
-def findForNthDay(n):
-    x_poly = polynomial_features.fit_transform(n.reshape(-1,1))
-    predicts = poly.predict(x_poly)
-    return predicts
-
+# y_poly_pred = poly.predict(x_poly)
+# plt.scatter(X, y, color="b",s=15)
+# plt.plot(X,y_poly_pred,color='r',label='Polynomial Regression')
+# r2 = metrics.r2_score(y,y_poly_pred)
+# print(r2)
 
 # Creating a pickle file for the classifier
 filename = 'polynomial_features.pkl'
@@ -72,12 +59,10 @@ def linePlot():
     print('linePlot', dataframeFilter)
     plt.subplots(figsize=(11, 9))
     sns.lineplot(x="Date", y="Cases", data=dataframeFilter)
-    bytes_image = io.BytesIO()
     plt.title("Graph showing number of cases as per the training data")
-    plt.savefig(bytes_image, format='png')
+
     my_path = os.path.dirname(__file__)+"/static/images"
     print(os.path.dirname(__file__))
-
     my_file = 'graph.png'
     plt.savefig(os.path.join(my_path, my_file))
     return "\static\images\graph.png"
