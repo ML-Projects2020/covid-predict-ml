@@ -139,7 +139,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: url('calendar.png') no-repeat;
     width: 20px;
 	height: 20px;
-	margin-top: 10px;
 	position: absolute;
 	right: 10px;
     border-width: thin;
