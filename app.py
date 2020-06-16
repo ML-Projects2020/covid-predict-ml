@@ -6,7 +6,7 @@ from CovidCases import linePlot as linePlot
 from datetime import date
 import locale
 
-# Load the Random Forest CLassifier model
+# Load the Linear Regression model
 polynomial_features = pickle.load(open("polynomial_features.pkl", 'rb'))
 ploynomail_model = pickle.load(open("ploynomail-model.pkl", 'rb'))
 print("ploy_features", polynomial_features)
