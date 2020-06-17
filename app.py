@@ -35,6 +35,7 @@ def predict():
         x_poly = polynomial_features.fit_transform(noOfdays.reshape(-1,1))
         my_prediction = ploynomail_model.predict(x_poly)
         predictNumber = int(my_prediction)
+        print('noOfdays', noOfdays)
         print('myprediction', my_prediction)
         fromNumber = predictNumber - 1000
         toNumber = predictNumber + 1000
