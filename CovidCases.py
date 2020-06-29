@@ -26,7 +26,7 @@ y_pred = lm.predict(X_train)
 plt.plot(X_train,y_pred,color='g',label='Linear Regression')
 
 
-polynomial_features= PolynomialFeatures(degree=3) #To convert X (date) to degree
+polynomial_features= PolynomialFeatures(degree=4) #To convert X (date) to degree
 x_poly = polynomial_features.fit_transform(X)
 poly = LinearRegression() #Object to fit / predict
 poly.fit(x_poly, y)
