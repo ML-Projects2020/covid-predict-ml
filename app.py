@@ -1,14 +1,16 @@
 # Importing essential libraries
 from flask import Flask, render_template, request
 import pickle
-import pandas as pd
 import numpy as np
-import utility as util
+from CovidCases import linePlot as linePlot
 from datetime import date
 import locale
-import os
-# # Load the Linear Regression model
-model = pickle.load(open(os.path.dirname(__file__)+"/email-day-prediction.pkl", 'rb'))
+
+# Load the Linear Regression model
+polynomial_features = pickle.load(open("polynomial_features.pkl", 'rb'))
+ploynomail_model = pickle.load(open("ploynomail-model.pkl", 'rb'))
+print("ploy_features", polynomial_features)
+print("ploynomail-model", ploynomail_model)
 
 app = Flask(__name__)
 
@@ -20,47 +22,28 @@ def calculateDays(year, month, day):
 
 @app.route('/')
 def home():
-    countries = util.getCountries()
-    return render_template('index.html', countries=countries)
+    linePlotPath = linePlot()
+    print(linePlotPath)
+    return render_template('index.html', linePlotPath=linePlotPath)
     
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
-        contactId = str(request.form['contactId'])
-        campaignId = str(request.form['campaignId'])
-        campaignDate = str(request.form['campaignDate'])
-        country = str(request.form['country'])
-        print("###############################")
-        print(contactId+" "+campaignId+' '+campaignDate+" "+country)
-        countries = util.getCountries()
-        data = {'Contact ID': contactId,
-                'campaign_id': campaignId,
-                'Campaign LaunchTime': campaignDate,
-                'Email Opened': 1
-                }
-        df = pd.DataFrame(data,index = [0])
-        df['Campaign LaunchTime'] = pd.to_datetime(df['Campaign LaunchTime'])
-        df['Campaign Day'] = df['Campaign LaunchTime'].dt.day_name()
-        df['Cam Hour'] = df['Campaign LaunchTime'].dt.hour
-        df['Cam Minute'] = df['Campaign LaunchTime'].dt.minute
-        days_dict = {'Monday':1, 'Tuesday':2,'Wednesday':3,'Thursday':4,'Friday':5,'Saturday':6,'Sunday':7}
-        df['Campaign Day'] = df['Campaign Day'].map(days_dict)
-        for index, value in enumerate(countries, start=1):
-            if( country == value):
-                print("&&&&&&&&&")
-                df['country_'+str(index)] = 1
-            else:
-                df['country_'+str(index)] = 0
-        X = df.drop(['Campaign LaunchTime'], axis=1)
-        print("XXXXXXXXXXXXXXXXXXXX")
-        print(X)
-        prediction =  model.predict(X)
-        print("PREDICTION", prediction[0])
-
-        key_list = list(days_dict.keys()) 
-        val_list = list(days_dict.values()) 
+        date = str(request.form['date'])
+        dates = date.split('-')
+        noOfdays = calculateDays(int(dates[0]),int(dates[1]), int(dates[2]))
+        x_poly = polynomial_features.fit_transform(noOfdays.reshape(-1,1))
+        my_prediction = ploynomail_model.predict(x_poly)
+        predictNumber = int(my_prediction)
+        print('noOfdays', noOfdays)
+        print('myprediction', my_prediction)
+        fromNumber = predictNumber - 1000
+        toNumber = predictNumber + 1000
         
-        return render_template('result.html', day=key_list[val_list.index(prediction[0])])
+        locale.setlocale(locale.LC_ALL, 'en_IN')
+        fromNumber = locale.format('%d', fromNumber, grouping=True)
+        toNumber = locale.format('%d', toNumber, grouping=True)
+        return render_template('result.html', fromNumber=fromNumber, toNumber=toNumber)
 
 if __name__ == '__main__':
 	app.run(debug=True)
