@@ -18,7 +18,7 @@ body{
 .container-bg {
     padding: 30px;
 	position: relative;
-	background:  #21a0ed;
+	background:  #54b948;
 	background-size: 500% 500%;
 }
 
@@ -30,12 +30,13 @@ body{
 }
 .padding-zero {
 	padding: 0px;
-    border: 1px solid;
+	border: 1px solid;
+	padding-top: 15px;
 }
 
 .heading_font{
     color: #ffffff;
-	font-family: 'Pacifico', cursive;
+	font-family: 'Open-Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif';
 	font-size: 35px;
 	font-weight: normal;
 }
@@ -125,8 +126,13 @@ body{
 
 .image {
 	width: 100%;
+	margin-top: -30px;
 }
 
+.predict-image {
+	width: 100%;
+	height: 70%;
+}
 input[type=date]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     display: none;
@@ -142,4 +148,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	right: 0px;
 	margin-top: 10px;
     border-width: thin;
+}
+
+.btn-primary {
+	background: #54b948 !important;
+	border-color: #cdcdcd !important;
+	width: 150px;
+}
+
+.sample {
+	height: 50%;
+	margin-top: 25px;
+}
+.label {
+	font-style: oblique !important;
+	font-size: 14px !important;
+	padding-left: 15px;
+	width: 70%;
+}
+.form-label {
+	font-weight: 600;
+	color: #333;
+}
+
+.form-sales {
+	margin-top: 35px;
 }

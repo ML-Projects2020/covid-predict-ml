@@ -18,7 +18,7 @@
 
     <!-- Website Title -->
     <div class="container-bg container">
-        <h2 class='container-heading'><span class="heading_font">Prediction: Covid Cases In India</span></h2>
+        <h2 class='container-heading'><span class="heading_font">Prediction: Day of the email opened</span></h2>
         <div class='description'>
             <p>A Machine Learning Web App, Built with Flask, Deployed using Heroku.</p>
         </div>
@@ -29,20 +29,37 @@
         <div class="row">
             <form class="form-horizontal col-md-4" action="{{ url_for('predict') }}" method="POST">
                 <div class="form-group">
-                    <label class="control-label" for="email">Select the Date:</label>
+                    <label class="control-label" for="email">Enter Contact ID</label>
                     <div >
-                        <input autocomplete="off" min="2020-03-01" max="2020-12-31" class="form-control" type="date" name="date"
+                        <input autocomplete="off"  class="form-control" type="text" placeholder="Ex: 72581" name="contactId">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Enter Campaign ID</label>
+                    <div >
+                        <input autocomplete="off"  class="form-control" type="text" placeholder="Ex: 8351" name="campaignId">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Select the Campaign Date:</label>
+                    <div >
+                        <input autocomplete="off" min="2020-03-01" max="2020-12-31" class="form-control" type="datetime-local" name="campaignDate"
                             placeholder="Enter date in yyyy-mm-dd, ex: 2020-06-12"><br>
 
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">Select the Country:</label>
+                   <select multiple="multiple" name="country">
+                        {% for item in countries %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                        </select>
+                <div >
                 <div class="col text-center">
                    <input type="submit" class="btn btn-primary" value="Predict">
                 </div>
             </form>
-            <div class="col-md-7">
-                <img class="image" src="{{ linePlotPath }}" alt="User Image" />
-            </div>
 
         </div>
     </div>
